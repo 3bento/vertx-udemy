@@ -10,14 +10,33 @@ public class MainVerticle extends AbstractVerticle {
 
   public static void main(String[] args) {
     final Vertx vertx = Vertx.vertx();
-    vertx.deployVerticle(new MainVerticle());
+    vertx.deployVerticle(new MainVerticle(), whenDeployed -> {
+      System.out.println("[~] Deployed " + MainVerticle.class.getName());
+//      vertx.undeploy(whenDeployed.result());
+    });
+
   }
 
   @Override
   public void start(final Promise<Void> startPromise) {
-    System.out.println("Start" + getClass().getName());
-    vertx.deployVerticle(new VerticleA());
-    vertx.deployVerticle(new VerticleB());
+    System.out.println("[+] Start " + getClass().getName());
+
+    vertx.deployVerticle(new VerticleB(), whenDeployed -> {
+      System.out.println("[~] Deployed " + VerticleB.class.getName());
+      vertx.undeploy(whenDeployed.result());
+    });
+
+    vertx.deployVerticle(new VerticleA(), whenDeployed -> {
+      System.out.println("[~] Deployed " + VerticleA.class.getName());
+      vertx.undeploy(whenDeployed.result());
+    });
+
     startPromise.complete();
+  }
+
+  @Override
+  public void stop(final Promise<Void> stopPromise) {
+    System.out.println("[-] Stop " + getClass().getName());
+    stopPromise.complete();
   }
 }
