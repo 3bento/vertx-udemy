@@ -6,8 +6,6 @@ import io.vertx.core.Vertx;
 
 public class MainVerticle extends AbstractVerticle {
 
-//  Logger logger = Logger.getLogger(getClass().getName());
-
   public static void main(String[] args) {
     Vertx vertx = Vertx.vertx();
     vertx.deployVerticle(new MainVerticle());
