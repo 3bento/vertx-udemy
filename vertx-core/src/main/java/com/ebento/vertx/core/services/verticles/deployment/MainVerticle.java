@@ -2,7 +2,9 @@ package com.ebento.vertx.core.services.verticles.deployment;
 
 import com.ebento.vertx.core.services.verticles.deployment.a.VerticleA;
 import com.ebento.vertx.core.services.verticles.deployment.b.VerticleB;
+import com.ebento.vertx.core.services.verticles.deployment.n.VerticleN;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 
@@ -11,7 +13,7 @@ public class MainVerticle extends AbstractVerticle {
   public static void main(String[] args) {
     final Vertx vertx = Vertx.vertx();
     vertx.deployVerticle(new MainVerticle(), whenDeployed -> {
-      System.out.println("[~] Deployed " + MainVerticle.class.getName());
+      System.out.println("[~] Deployed " + MainVerticle.class.getName() + " on thread " + Thread.currentThread().getName());
 //      vertx.undeploy(whenDeployed.result());
     });
 
@@ -19,17 +21,19 @@ public class MainVerticle extends AbstractVerticle {
 
   @Override
   public void start(final Promise<Void> startPromise) {
-    System.out.println("[+] Start " + getClass().getName());
+    System.out.println("[+] Start " + getClass().getName() + " on thread " + Thread.currentThread().getName());
 
     vertx.deployVerticle(new VerticleB(), whenDeployed -> {
-      System.out.println("[~] Deployed " + VerticleB.class.getName());
+      System.out.println("[~] Deployed " + VerticleB.class.getName() + " on thread " + Thread.currentThread().getName());
       vertx.undeploy(whenDeployed.result());
     });
 
     vertx.deployVerticle(new VerticleA(), whenDeployed -> {
-      System.out.println("[~] Deployed " + VerticleA.class.getName());
+      System.out.println("[~] Deployed " + VerticleA.class.getName() + " on thread " + Thread.currentThread().getName());
       vertx.undeploy(whenDeployed.result());
     });
+
+    vertx.deployVerticle(VerticleN.class.getName(), new DeploymentOptions().setInstances(4));
 
     startPromise.complete();
   }
