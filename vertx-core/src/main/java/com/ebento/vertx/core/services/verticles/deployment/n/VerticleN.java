@@ -6,7 +6,7 @@ import io.vertx.core.Promise;
 public class VerticleN extends AbstractVerticle {
   @Override
   public void start(final Promise<Void> startPromise) throws Exception {
-    System.out.println("[+] Start " + this.getClass().getName() + " on thread " + Thread.currentThread().getName());
+    System.out.println("[+] Start " + config().toString() + " on thread " + Thread.currentThread().getName());
     startPromise.complete();
   }
 
