@@ -8,10 +8,14 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.UUID;
 
 public class MainVerticle extends AbstractVerticle {
+
+  private static final Logger LOG = LogManager.getLogger();
 
   public static void main(String[] args) {
     final Vertx vertx = Vertx.vertx();
@@ -24,15 +28,15 @@ public class MainVerticle extends AbstractVerticle {
 
   @Override
   public void start(final Promise<Void> startPromise) {
-    System.out.println("[+] Start " + getClass().getName() + " on thread " + Thread.currentThread().getName());
+    LOG.debug("[+] Start {} on thread {}", getClass().getName(), Thread.currentThread().getName());
 
     vertx.deployVerticle(new VerticleB(), whenDeployed -> {
-      System.out.println("[~] Deployed " + VerticleB.class.getName() + " on thread " + Thread.currentThread().getName());
+      LOG.debug("[~] Deployed {} on thread {}", VerticleB.class.getName(), Thread.currentThread().getName());
       vertx.undeploy(whenDeployed.result());
     });
 
     vertx.deployVerticle(new VerticleA(), whenDeployed -> {
-      System.out.println("[~] Deployed " + VerticleA.class.getName() + " on thread " + Thread.currentThread().getName());
+      LOG.debug("[~] Deployed {} on thread {}", VerticleA.class.getName(), Thread.currentThread().getName());
       vertx.undeploy(whenDeployed.result());
     });
 
@@ -49,7 +53,7 @@ public class MainVerticle extends AbstractVerticle {
 
   @Override
   public void stop(final Promise<Void> stopPromise) {
-    System.out.println("[-] Stop " + getClass().getName());
+    LOG.debug("[-] Stop {}", getClass().getName());
     stopPromise.complete();
   }
 }
