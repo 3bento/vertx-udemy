@@ -1,4 +1,4 @@
-package com.ebento.vertx.core;
+package com.ebento.vertx.core.web;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;

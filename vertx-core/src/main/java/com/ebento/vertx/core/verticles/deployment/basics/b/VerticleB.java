@@ -1,8 +1,5 @@
-package com.ebento.vertx.core.services.verticles.deployment.b;
+package com.ebento.vertx.core.verticles.deployment.basics.b;
 
-import com.ebento.vertx.core.services.verticles.deployment.b.bb.VerticleBA;
-import com.ebento.vertx.core.services.verticles.deployment.b.bb.VerticleBB;
-import com.ebento.vertx.core.services.verticles.deployment.b.bb.VerticleBC;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 

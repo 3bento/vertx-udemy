@@ -1,10 +1,9 @@
-package com.ebento.vertx.core.services.verticles.deployment.a.aa;
+package com.ebento.vertx.core.verticles.deployment.basics.a.aa;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 
-public class VerticleAA extends AbstractVerticle {
-
+public class VerticleAB extends AbstractVerticle {
   @Override
   public void start(final Promise<Void> startPromise) {
     System.out.println("Start "+ getClass().getName());

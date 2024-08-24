@@ -1,4 +1,4 @@
-package com.ebento.vertx.core.worker;
+package com.ebento.vertx.core.verticles.worker;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;

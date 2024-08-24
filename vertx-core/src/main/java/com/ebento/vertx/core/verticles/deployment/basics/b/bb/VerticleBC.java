@@ -1,9 +1,9 @@
-package com.ebento.vertx.core.services.verticles.deployment.b.bb;
+package com.ebento.vertx.core.verticles.deployment.basics.b.bb;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 
-public class VerticleBB extends AbstractVerticle {
+public class VerticleBC extends AbstractVerticle {
   @Override
   public void start(final Promise<Void> startPromise) {
     System.out.println("Start "+getClass().getName());

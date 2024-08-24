@@ -1,4 +1,4 @@
-package com.ebento.vertx.core.services.verticles.deployment.n;
+package com.ebento.vertx.core.verticles.deployment.basics.n;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
